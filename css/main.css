@@ -1,3 +1,11 @@
-#catPic{
-  max-width: 600px;
+.mainClass{
+  display: flex;
+}
+
+.catPhotoStyle{
+  max-width: 400px;
+}
+
+.catContainer{
+  margin:20px;
 }

@@ -1,5 +1,16 @@
+* {
+  border: 1px solid red !important;
+}
+
+body{
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mainClass{
   display: flex;
+  text-align: center;
 }
 
 .catPhotoStyle{
@@ -7,5 +18,8 @@
 }
 
 .catContainer{
+  width: 100%;
   margin:20px;
+  text-align: center;
+  float: right;
 }

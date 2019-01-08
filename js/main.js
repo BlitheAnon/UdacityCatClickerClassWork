@@ -64,11 +64,33 @@ window.onload = function() {
     }
   };
 
-  //连接层
+  let adminView = {
+    init: function() {
+      this.showAdminArea();
+      this.hideAdminArea();
+    },
+    showAdminArea: function() {
+      //显示管理员区域
+      let adminButton = document.getElementById('adminBtn');
+      adminButton.addEventListener('click', function() {
+        document.getElementById('adminArea').style.display = 'inline';
+      });
+    },
+    hideAdminArea: function() {
+      //隐藏管理员区域
+      let cancelButton=document.getElementById('cancelBtn');
+      cancelButton.addEventListener('click',function() {
+        document.getElementById('adminArea').style.display = 'none';
+      });
+    }
+  };
+
+  //章鱼连接层
   let octopus = {
     init: function() {
       catListView.init();
       catView.init();
+      adminView.init();
     },
     getCatArr: function() {
       return model.catArr;

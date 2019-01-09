@@ -16,12 +16,13 @@
     </aside>
 
     <div class="catContainer">
-      <p>name:<span id="catName"></span></p>
-      <p id="imgPart"></p>
-      <!-- <img class="catPhotoStyle" id="catPic" src="images/cat1.jpg" alt="猫"> -->
+      <p>name:<span data-bind="text: catName"></span></p>
+
+      <section>等级：<span data-bind="text: level"></span></section>
+      <img class="catPhotoStyle" data-bind="attr: {src: imgSrc}, click: registerClick" alt="猫">
       <section>
         点击数
-        <span id="clickedCount"></span>
+        <span data-bind="text: clickCount"></span>
       </section>
 
       <button type="button" name="button" id="adminBtn">Admin</button>
@@ -38,6 +39,7 @@
   </main>
 
   <script src="js/main.js"></script>
+  <script src="js/knockout-3.4.2.js"></script>
 </body>
 
 </html>

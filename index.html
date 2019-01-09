@@ -10,8 +10,9 @@
 <body>
   <!-- 侧边猫列表 -->
   <main class="mainClass">
-    <aside class="catlist">
-      <ul id="catList">
+    <aside class="catlist" >
+      <ul data-bind="foreach: cat">
+        <li data-bind="text: catName"></li>
       </ul>
     </aside>
 

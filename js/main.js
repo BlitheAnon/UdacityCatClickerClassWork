@@ -1,41 +1,36 @@
 window.onload = function() {
   //20190109修改为MVVM模型
 
-  // model.levelCalculate = ko.computed(function() {
-  //   let level = '新生';
-  //   switch (this.countArr[0]) {
-  //     case '5':
-  //       level = '幼年';
-  //       break;
-  //     case '10':
-  //       level = '青年';
-  //       break;
-  //     case '15':
-  //       level = '中年';
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //
-  //   console.log(this.couhtntArr);
-  //   return this.countTemple([0] + this.countTemple[1]);
-  // }, model);
-
   //knockout.js
   //viewmodel 类
   function AppViewModel() {
-    this.cat = {
+    this.cat = ko.observableArray([{
       catName: 'cat1',
       imgSrc: 'images/cat1.jpg',
       level: '幼年体',
       clickCount: 0
-    };
+    }, {
+      catName: 'cat2',
+      imgSrc: 'images/cat2.jpg',
+      level: '幼年体',
+      clickCount: 0
+    }, {
+      catName: 'cat3',
+      imgSrc: 'images/cat3.jpg',
+      level: '幼年体',
+      clickCount: 0
+    }, {
+      catName: 'cat4',
+      imgSrc: 'images/cat4.jpg',
+      level: '幼年体',
+      clickCount: 0
+    }]);
     this.nowClickIndex = 0;
 
-    this.catName = ko.observable(this.cat.catName);
-    this.imgSrc = ko.observable(this.cat.imgSrc);
-    this.clickCount = ko.observable(this.cat.clickCount);
-    this.level = ko.observable(this.cat.level);
+    this.catName = ko.observable(this.cat()[0].catName);
+    this.imgSrc = ko.observable(this.cat()[0].imgSrc);
+    this.clickCount = ko.observable(this.cat()[0].clickCount);
+    this.level = ko.observable(this.cat()[0].level);
 
     //图片点击监听
     this.registerClick = function() {

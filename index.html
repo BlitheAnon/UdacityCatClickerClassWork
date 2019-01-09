@@ -9,9 +9,9 @@
 
 <body>
   <!-- 侧边猫列表 -->
-  <main class="mainClass">
-    <aside class="catlist" >
-      <ul data-bind="foreach: cat">
+  <main class="mainClass" data-bind="with:currentCat">
+    <aside class="catlist">
+      <ul data-bind="foreach: catList">
         <li data-bind="text: catName"></li>
       </ul>
     </aside>
@@ -20,10 +20,10 @@
       <p>name:<span data-bind="text: catName"></span></p>
 
       <section>等级：<span data-bind="text: level"></span></section>
-      <img class="catPhotoStyle" data-bind="attr: {src: imgSrc}, click: registerClick" alt="猫">
+      <img class="catPhotoStyle" data-bind="attr: {src: imgSrc}, click: $parent.registerClick" alt="猫">
       <section>
         点击数
-        <span data-bind="text: clickCount"></span>
+        <span data-bind="text: clickCount()"></span>
       </section>
 
       <button type="button" name="button" id="adminBtn">Admin</button>

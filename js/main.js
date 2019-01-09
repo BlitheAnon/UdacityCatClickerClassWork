@@ -1,10 +1,9 @@
 window.onload = function() {
   //20190109修改为MVVM模型
 
-  //knockout.js
-  //viewmodel 类
-  function AppViewModel() {
-    this.cat = ko.observableArray([{
+  //cat类
+  var Cat = function() {
+    this.catList = ko.observableArray([{
       catName: 'cat1',
       imgSrc: 'images/cat1.jpg',
       level: '幼年体',
@@ -26,16 +25,9 @@ window.onload = function() {
       clickCount: 0
     }]);
     this.nowClickIndex = 0;
-
-    this.catName = ko.observable(this.cat()[0].catName);
-    this.imgSrc = ko.observable(this.cat()[0].imgSrc);
-    this.clickCount = ko.observable(this.cat()[0].clickCount);
-    this.level = ko.observable(this.cat()[0].level);
-
-    //图片点击监听
-    this.registerClick = function() {
-      this.clickCount(this.clickCount() + 1);
-    };
+    this.catName = ko.observable(this.catList()[0].catName);
+    this.imgSrc = ko.observable(this.catList()[0].imgSrc);
+    this.clickCount = ko.observable(this.catList()[0].clickCount);
 
     this.level = ko.pureComputed(function() {
       let level = '新生';
@@ -51,6 +43,22 @@ window.onload = function() {
 
       return level;
     }, this);
+  }
+
+  //knockout.js
+  //viewmodel 类
+  function AppViewModel() {
+    //接收Cat对象
+    this.currentCat = ko.observable(new Cat());
+
+    let self=this;
+
+    //图片点击监听
+    this.registerClick = function() {
+      //console.log(this);
+      //self.currentCat().clickCount(self.currentCat().clickCount() + 1);
+      this.clickCount(this.clickCount()+1);
+    };
   }
 
   // Activates knockout.js

@@ -1,33 +1,38 @@
 window.onload = function() {
   //20190109修改为MVVM模型
+  var catData = [{
+    catName: 'cat1',
+    imgSrc: 'images/cat1.jpg',
+    level: '幼年体',
+    clickCount: 0
+  }, {
+    catName: 'cat2',
+    imgSrc: 'images/cat2.jpg',
+    level: '幼年体',
+    clickCount: 0
+  }, {
+    catName: 'cat3',
+    imgSrc: 'images/cat3.jpg',
+    level: '幼年体',
+    clickCount: 0
+  }, {
+    catName: 'cat4',
+    imgSrc: 'images/cat4.jpg',
+    level: '幼年体',
+    clickCount: 0
+  }, {
+    catName: 'cat5',
+    imgSrc: 'images/cat5.jpg',
+    level: '幼年体',
+    clickCount: 0
+  }];
 
   //cat类
-  var Cat = function() {
-    this.catList = ko.observableArray([{
-      catName: 'cat1',
-      imgSrc: 'images/cat1.jpg',
-      level: '幼年体',
-      clickCount: 0
-    }, {
-      catName: 'cat2',
-      imgSrc: 'images/cat2.jpg',
-      level: '幼年体',
-      clickCount: 0
-    }, {
-      catName: 'cat3',
-      imgSrc: 'images/cat3.jpg',
-      level: '幼年体',
-      clickCount: 0
-    }, {
-      catName: 'cat4',
-      imgSrc: 'images/cat4.jpg',
-      level: '幼年体',
-      clickCount: 0
-    }]);
-    this.nowClickIndex = 0;
-    this.catName = ko.observable(this.catList()[0].catName);
-    this.imgSrc = ko.observable(this.catList()[0].imgSrc);
-    this.clickCount = ko.observable(this.catList()[0].clickCount);
+  var Cat = function(data) {
+    // this.catList = ko.observableArray(data);
+    this.catName = ko.observable(data.catName);
+    this.imgSrc = ko.observable(data.imgSrc);
+    this.clickCount = ko.observable(data.clickCount);
 
     this.level = ko.pureComputed(function() {
       let level = '新生';
@@ -48,16 +53,28 @@ window.onload = function() {
   //knockout.js
   //viewmodel 类
   function AppViewModel() {
-    //接收Cat对象
-    this.currentCat = ko.observable(new Cat());
+    let self = this;
 
-    let self=this;
+    this.catList = ko.observableArray([]);
+    //遍历所有猫，并添加到catList数组，给单个猫各类属性添加计算监控对象
+    catData.forEach(function(item) {
+      self.catList.push(new Cat(item));
+    });
+
+    this.currentCat = ko.observable(this.catList()[0]);
+
+    //列表点击监听
+    this.catItemClick = function(clickedCat) {
+      //console.log('click');
+      //重新赋值，当前点击对象作为参数传递在内部
+      self.currentCat(clickedCat);
+    };
 
     //图片点击监听
     this.registerClick = function() {
-      //console.log(this);
       //self.currentCat().clickCount(self.currentCat().clickCount() + 1);
-      this.clickCount(this.clickCount()+1);
+      //包含在with:currentCat内部，this指代currentCat
+      this.clickCount(this.clickCount() + 1);
     };
   }
 

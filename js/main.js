@@ -30,6 +30,7 @@ window.onload = function() {
   //cat类
   var Cat = function(data) {
     // this.catList = ko.observableArray(data);
+    //添加观察属性
     this.catName = ko.observable(data.catName);
     this.imgSrc = ko.observable(data.imgSrc);
     this.clickCount = ko.observable(data.clickCount);
@@ -55,12 +56,16 @@ window.onload = function() {
   function AppViewModel() {
     let self = this;
 
+// 初始化一个空数组,catList为观察者
     this.catList = ko.observableArray([]);
     //遍历所有猫，并添加到catList数组，给单个猫各类属性添加计算监控对象
     catData.forEach(function(item) {
+        //向catList观察者数组内添加对象
       self.catList.push(new Cat(item));
     });
 
+//设置当前显示的图片
+//在视图层with内使用同级对象$parent.registerClick
     this.currentCat = ko.observable(this.catList()[0]);
 
     //列表点击监听
